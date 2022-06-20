@@ -159,13 +159,14 @@ candidates = [[direction, angle] for direction in directions for angle in angles
 # Tests
 
 def test_greyscale():
-    img = mpimg.imread('monkey.gif')
+    source_size, destination_size, step = 8, 4, 1
+    img = mpimg.imread('resized.jpg')
     img = get_greyscale_image(img)
-    img = reduce(img, 4)
+    img = reduce(img, 2)
     plt.figure()
     plt.imshow(img, cmap='gray', interpolation='none')
-    transformations = compress(img, 8, 4, 8)
-    iterations = decompress(transformations, 8, 4, 8)
+    transformations = compress(img, source_size, destination_size, step)
+    iterations = decompress(transformations, source_size, destination_size, step)
     plot_iterations(iterations, img)
     plt.show()
 
